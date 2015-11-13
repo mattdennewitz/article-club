@@ -31,6 +31,7 @@ class Link(models.Model):
     title = models.CharField(max_length=240)
     url = models.URLField()
     read_time = models.PositiveIntegerField() # in seconds
+    is_public = models.BooleanField(default=True)
     published_at = models.DateField()
 
     def __unicode__(self):
