@@ -85,12 +85,28 @@ def find_bundles_for_url(request):
     # get/create link for given url
     url = request.query_params.get('url', 'nothing')
 
+    # validate url is a url
+    v = URLValidator()
+
+    try:
+        v(url)
+    except ValidationError as exc:
+        # the user must be joking
+        return Response({'error': True, 'msg': 'Invalid URL'}, status=400)
+
     try:
         # fetch existing link
         link = Link.objects.get(url=url)
-        bundle_links = BundleLink.objects.filter(link=link).values()[:10]
+        bundle_links = BundleLink.objects.filter(link=link)
+
+        # separate the Bundles from the bundle_links
+        #pairs = [pair.bundle for pair in bundle_links]
+
+        # serialize the bundles
+        serialized_bundles = BundleSerializer(bundle_links, many=True)
+
     except (BundleLink.DoesNotExist, Link.DoesNotExist):
         # we have never seen this link before
         return Response('', status=204)
 
-    return Response(BundleSerializer(bundle_links.data), status=200)
+    return Response(serialized_bundles.data, status=200)
