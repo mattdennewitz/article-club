@@ -2,7 +2,7 @@
 
 console.log('\'Allo \'Allo! Popup');
 
-var $myBundleButton = $('#my-bundle-tab');
+var $myBundleButton = $('#add-to-bundle');
 var $bundleButton = $('#bundle-tab');
 
 var $bundles = $('#existing-bundles-container');
@@ -15,6 +15,7 @@ console.log($myBundles);
 $myBundleButton.on('click', function () {
   $myBundles.removeClass('hide');
   $bundles.addClass('hide');
+  $('.add-to-bundle-container').addClass('hide');
 });
 
 $bundleButton.on('click', function () {

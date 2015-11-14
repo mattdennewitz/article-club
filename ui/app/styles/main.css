@@ -1,7 +1,7 @@
 body {
   padding: 1px;
   height: 100%;
-  width: 400px;
+  width: 300px;
   background-color: #f1f1f1;
 }
 
@@ -82,9 +82,12 @@ button {
 
 .bundle-title {
   font-size: 1.5em;
-  border-bottom: 1px solid #d5d5d5;
   margin: .5em 0;
   padding: .5em;
+}
+
+.comfort-level{
+  float: right;
 }
 
 .bundle-link-list {
@@ -100,6 +103,14 @@ button {
   border-bottom: 1px solid #d5d5d5;
 }
 
+.link-details {
+  font-size: .875em;
+}
+
+.link-title {
+  font-size: 1.1em;
+}
+
 .see-more-bundles {
 
 }
@@ -112,10 +123,50 @@ button {
 
 .view-more-bundles-about {
   text-align: center;
-  font-size: 1.2em;
+  font-size: 1em;
   margin: 2em;
 }
 
 .bundle-topic-name {
   font-weight: 700;
+}
+
+
+.choose-header {
+  margin: .5em .5em 0 .5em;
+  padding: 1em;
+  border-bottom: 1px solid #d5d5d5;
+}
+
+.choose-bundle {
+  font-size: 1.25em;
+  text-align: center;
+}
+
+.my-bundle-item {
+  font-size: 1.2em;
+  border-bottom: 1px solid #d5d5d5;
+  padding: .75em;
+}
+
+.add-button {
+  float: right;
+  color: #ee645c;
+  font-size: 1.25em;
+}
+
+.create {
+  background-color: white;
+  border-radius: 4px;
+  border: none;
+  padding: .75em;
+}
+
+.create-new {
+  font-size: 1.2 em;
+}
+
+.browse-by-topic {
+  text-align: center;
+  margin: 2em;
 }
