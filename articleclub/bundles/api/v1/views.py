@@ -115,17 +115,21 @@ def find_bundles_for_url(request):
                    .filter(link=link)
                    .only('bundle_id')
                    .distinct())
-    bundle_ids = [m.bundle_id for m in memberships]
-    all_links = BundleLink.objects.filter(bundle_id__in=bundle_ids)
 
-    # group bundlelinks by bundle
+    # fetch all bundle-link pairs for bundles containing this link
+    bundle_ids = [m.bundle_id for m in memberships]
+    all_links = (BundleLink.objects
+                 .filter(bundle_id__in=bundle_ids)
+                 .select_related('bundle', 'link', 'curator'))
+
+    # group bundlelinks by bundle - <bundle: [bundlelink, ...]>
     grouped = itertools.groupby(all_links, key=operator.attrgetter('bundle'))
 
     output = []
 
     for bundle, link_list in grouped:
         setattr(bundle, 'link_list', link_list)
-        bundle_s = BundleSerializer(bundle)
-        output.append(bundle_s.data)
+        serialized = BundleSerializer(bundle)
+        output.append(serialized.data)
 
     return Response(output)
