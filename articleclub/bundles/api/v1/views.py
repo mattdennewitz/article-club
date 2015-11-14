@@ -82,5 +82,15 @@ def find_bundles_for_url(request):
     2. Search for any link-bundle membership with `BundleLink`
     3. Return serialized collection of bundles containing this `Link`
     """
+    # get/create link for given url
+    url = request.query_params.get('url', 'nothing')
 
-    pass
+    try:
+        # fetch existing link
+        link = Link.objects.get(url=url)
+        bundle_links = BundleLink.objects.filter(link=link).values()[:10]
+    except (BundleLink.DoesNotExist, Link.DoesNotExist):
+        # we have never seen this link before
+        return Response('', status=204)
+
+    return Response(BundleSerializer(bundle_links.data), status=200)
