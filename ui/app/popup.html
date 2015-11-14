@@ -6,30 +6,83 @@
     <!-- bower:css -->
     <!-- endbower -->
     <!-- endbuild -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <!-- build:css styles/main.css -->
     <link href="styles/main.css" rel="stylesheet">
     <!-- endbuild -->
   </head>
   <body>
-    <div id="existing-bundle">
-      <h1>Article Club</h1>
-      <p>Add your link to a bundle.</p>
-      <select id="bundle-select">
-        <option>Pick your bundle</option>
-      </select>
+    <div id="header">
     </div>
 
-    <div id="add-url">
+    <div class="add-to-bundle-container">
+      <button id="add-to-bundle" class="add-to-bundle"><i class="fa fa-plus"></i> Add to a bundle</button>
     </div>
 
-    <div id="create-bundle">
+    <div id="existing-bundles-container">
+      <div class="existing-bundle-header">
+        <h2 class="page-header heavy-text">This page is part of <a class="num-bundles" href="">X bundles!</a></h2>
+        <p class="comfort-levels light-text">Links are organized by level of comfort with a topic.</p>
+        <div class="comfort-level-colors">
+          <p><i class="fa fa-circle casual"></i> <span class="light-text">Casual</span> <i class="fa fa-circle engaged"></i> <span class="light-text">Engaged</span> <i class="fa fa-circle expert"></i> <span class="light-text">Expert</span></p>
+        </div>
+      </div>
+      <div class="existing-bundles">
+        <h3 class="bundle-title heavy-text">Missy Elliot</h3>
+        <ul class="bundle-link-list">
+          <li class="bundle-link">
+            <a href="">Missy Elliot takes over the world</a>
+            <p class="light-text">The Washington Post</p>
+            <p class="light-text">Oct 14, 2015</p>
+            <p></p>
+          </li>
+          <li class="bundle-link">
+            <a href="">Missy Elliot takes over the world</a>
+            <p class="light-text">The Washington Post</p>
+            <p class="light-text">Oct 14, 2015</p>
+            <p class="light-text"></p>
+          </li>
+          <li class="bundle-link">
+            <a href="">Missy Elliot takes over the world</a>
+            <p class="light-text">The Washington Post</p>
+            <p class="light-text">Oct 14, 2015</p>
+            <p class="light-text"></p>
+          </li>
+          <li class="bundle-link">
+            <a href="">Missy Elliot takes over the world</a>
+            <p class="light-text">The Washington Post</p>
+            <p class="light-text">Oct 14, 2015</p>
+            <p class="light-text"></p>
+          </li>
+          <li class="see-more-bundles">
+            <p class="see-more-links heavy-text">See more links <i class="fa fa-chevron-down"></i></p>
+          </li>
+        </ul>
+      </div>
+
+      <div class="view-more-bundles-about">
+        <a href="">View more links about <span class="bundle-topic-name">Missy Elliot</span>  <i class="fa fa-external-link"></i></a>
+      </div>
+    </div>
+
+
+    <div id="my-bundle-container">
+      <h3>My Bundles</h3>
+      <ul class="my bundles">
+        <li class="bundle">
+          <i class="fa fa-plus-circle"></i> Missy Elliot
+        </li>
+        <li class="bundle">
+          + ISIS
+        </li>
+      </ul>
     </div>
 
     <!-- build:js scripts/popup-vendor.js -->
     <!-- bower:js -->
     <!-- endbower -->
     <!-- endbuild -->
-
+    <script src="scripts.babel/jquery.min.js"></script>
     <!-- build:js scripts/popup.js -->
     <script src="scripts/popup.js"></script>
     <!-- endbuild -->

@@ -1,3 +1,121 @@
 body {
   padding: 1px;
+  height: 100%;
+  width: 400px;
+  background-color: #f1f1f1;
+}
+
+h1, h2, h3, h4, h5, p {
+  font-family: Helvetica, Arial, sans-serif;
+  margin: .5em;
+}
+
+a {
+  color: #2e6d9d;
+  text-decoration: none;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+button {
+  cursor: pointer;
+}
+
+.light-text {
+   color: #6e6e6e;
+}
+
+.heavy-text {
+  color: #2a2a2a;
+}
+
+.hide {
+  display: none;
+}
+
+.add-to-bundle-container {
+  text-align: center;
+  margin-bottom: 2em;
+}
+
+.add-to-bundle {
+  background-color: #ee645c;
+  color: white;
+  border: none;
+  width: 90%;
+  height: 3em;
+  margin: 0 auto;
+  border-radius: 4px;
+  font-size: 1.25em;
+  font-weight: 700;
+}
+
+.page-header {
+  font-weight: 700;
+  font-size: 1.2em;
+}
+
+.casual {
+  color: #d7c944;
+}
+
+.engaged {
+  color: #f68b28;
+}
+
+.expert {
+  color: #ee645c;
+}
+
+.existing-bundles {
+  background-color: white;
+  padding: .5em;
+  margin: .5em;
+}
+
+.existing-bundle-header {
+  text-align: center;
+}
+
+.bundle-title {
+  font-size: 1.5em;
+  border-bottom: 1px solid #d5d5d5;
+  margin: .5em 0;
+  padding: .5em;
+}
+
+.bundle-link-list {
+  border-radius: 4px;
+}
+
+.bundle-link {
+  border-bottom: 1px solid #d5d5d5;
+  margin: .5em;
+}
+
+.comfort-level-colors {
+  border-bottom: 1px solid #d5d5d5;
+}
+
+.see-more-bundles {
+
+}
+
+.see-more-links {
+  text-align: center;
+  font-size: 1.3em;
+  font-weight: 700;
+}
+
+.view-more-bundles-about {
+  text-align: center;
+  font-size: 1.2em;
+  margin: 2em;
+}
+
+.bundle-topic-name {
+  font-weight: 700;
 }
