@@ -10,6 +10,18 @@ COMFORT_LEVELS = (
     (2, 'Expert'),
 )
 
+
+class Link(models.Model):
+    title = models.CharField(max_length=240)
+    url = models.URLField()
+    read_time = models.PositiveIntegerField() # in seconds
+    is_public = models.BooleanField(default=True)
+    published_at = models.DateField()
+
+    def __unicode__(self):
+        return self.title
+
+
 class Bundle(models.Model):
     """A bundle, a virtual envelope for links
     """
@@ -23,16 +35,7 @@ class Bundle(models.Model):
 
     tags = TaggableManager()
 
-    def __unicode__(self):
-        return self.title
-
-
-class Link(models.Model):
-    title = models.CharField(max_length=240)
-    url = models.URLField()
-    read_time = models.PositiveIntegerField() # in seconds
-    is_public = models.BooleanField(default=True)
-    published_at = models.DateField()
+    links = models.ManyToManyField(Link, through='BundleLink')
 
     def __unicode__(self):
         return self.title
