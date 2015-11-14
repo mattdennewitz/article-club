@@ -1,3 +1,7 @@
+import collections
+import itertools
+import operator
+
 from django.core.exceptions import ValidationError
 from django.core.validators import URLValidator
 from django.shortcuts import get_object_or_404
@@ -107,14 +111,21 @@ def find_bundles_for_url(request):
         return Response('[]')
 
     # find all bundle memberships for this link
-    bundle_links = BundleLink.objects.filter(link=link).only('bundle_id')
+    memberships = (BundleLink.objects
+                   .filter(link=link)
+                   .only('bundle_id')
+                   .distinct())
+    bundle_ids = [m.bundle_id for m in memberships]
+    all_links = BundleLink.objects.filter(bundle_id__in=bundle_ids)
 
-    # fetch bundles including this link
-    bundle_ids = [bl.bundle_id for bl in bundle_links]
-    bundles = (Bundle.objects
-               .prefetch_related('links')
-               .filter(id__in=bundle_ids))
+    # group bundlelinks by bundle
+    grouped = itertools.groupby(all_links, key=operator.attrgetter('bundle'))
 
-    serialized_bundles = BundleSerializer(bundles, many=True)
+    output = []
 
-    return Response(serialized_bundles.data)
+    for bundle, link_list in grouped:
+        setattr(bundle, 'link_list', link_list)
+        bundle_s = BundleSerializer(bundle)
+        output.append(bundle_s.data)
+
+    return Response(output)
