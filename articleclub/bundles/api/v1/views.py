@@ -9,7 +9,8 @@ from rest_framework.response import Response
 import urltools
 
 from ...models import COMFORT_LEVELS, Bundle, Link, BundleLink
-from .serializers import BundleSerializer, LinkSerializer
+from .serializers import (BundleSerializer, LinkSerializer,
+                          BundleLinkSerializer)
 
 
 class CreateBundleView(generics.CreateAPIView):
@@ -58,6 +59,8 @@ def add_link_to_bundle(request, bundle_id):
         return Response({'error': True,
                         'msg': 'Please specify a reader comfort level'})
 
+    url = urltools.normalize(url)
+
     try:
         # fetch existing link
         link = Link.objects.get(url=url)
@@ -82,8 +85,9 @@ def find_bundles_for_url(request):
     2. Search for any link-bundle membership with `BundleLink`
     3. Return serialized collection of bundles containing this `Link`
     """
+
     # get/create link for given url
-    url = request.query_params.get('url', 'nothing')
+    url = request.query_params.get('url', None)
 
     # validate url is a url
     v = URLValidator()
@@ -94,19 +98,23 @@ def find_bundles_for_url(request):
         # the user must be joking
         return Response({'error': True, 'msg': 'Invalid URL'}, status=400)
 
+    # normalize url for tidyness
+    url = urltools.normalize(url)
+
     try:
-        # fetch existing link
         link = Link.objects.get(url=url)
-        bundle_links = BundleLink.objects.filter(link=link)
+    except Link.DoesNotExist:
+        return Response('[]')
 
-        # separate the Bundles from the bundle_links
-        #pairs = [pair.bundle for pair in bundle_links]
+    # find all bundle memberships for this link
+    bundle_links = BundleLink.objects.filter(link=link).only('bundle_id')
 
-        # serialize the bundles
-        serialized_bundles = BundleSerializer(bundle_links, many=True)
+    # fetch bundles including this link
+    bundle_ids = [bl.bundle_id for bl in bundle_links]
+    bundles = (Bundle.objects
+               .prefetch_related('links')
+               .filter(id__in=bundle_ids))
 
-    except (BundleLink.DoesNotExist, Link.DoesNotExist):
-        # we have never seen this link before
-        return Response('', status=204)
+    serialized_bundles = BundleSerializer(bundles, many=True)
 
-    return Response(serialized_bundles.data, status=200)
+    return Response(serialized_bundles.data)

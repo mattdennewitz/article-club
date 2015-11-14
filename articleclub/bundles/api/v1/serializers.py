@@ -3,21 +3,24 @@ from rest_framework.serializers import ModelSerializer
 from ...models import Bundle, Link, BundleLink
 
 
-class BundleSerializer(ModelSerializer):
-    class Meta:
-        fields = ('title', 'description', )
-        model = Bundle
-
-
 class LinkSerializer(ModelSerializer):
     class Meta:
-        fields = ('title', 'url', 'is_public', 'read_time', 'published_at', )
         model = Link
+        fields = ('title', 'url', 'is_public', 'read_time', 'published_at', )
 
 
-class BundleLink(ModelSerializer):
+class BundleSerializer(ModelSerializer):
+    links = LinkSerializer(many=True)
+
+    class Meta:
+        model = Bundle
+        fields = ('links', 'title', 'description', )
+
+
+class BundleLinkSerializer(ModelSerializer):
     link = LinkSerializer()
     bundle = BundleSerializer()
 
     class Meta:
+        model = BundleLink
         fields = ('link', 'bundle', 'comfort_level', )
