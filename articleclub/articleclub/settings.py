@@ -25,6 +25,8 @@ os.environ['PUBLIC_SUFFIX_LIST'] = os.path.realpath(
     )
 )
 
+CORS_ORIGIN_ALLOW_ALL = True
+
 # ---
 
 # Quick-start development settings - unsuitable for production
@@ -51,6 +53,7 @@ INSTALLED_APPS = (
 
     'taggit',
     'rest_framework',
+    'corsheaders',
 
     'articleclub',
     'bundles',
@@ -58,6 +61,7 @@ INSTALLED_APPS = (
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',

@@ -25,7 +25,7 @@ class CreateBundleView(generics.CreateAPIView):
         return Response(serializer.data, status=201, headers=headers)
 
 
-@api_view
+@api_view(http_method_names=['POST'])
 def add_link_to_bundle(request, bundle_id):
     """Adds a URL to an existing bundle.
 
@@ -74,7 +74,7 @@ def add_link_to_bundle(request, bundle_id):
     return Response('', status=201)
 
 
-@api_view
+@api_view(http_method_names=['GET'])
 def find_bundles_for_url(request):
     """Fetches existing bundles for a user-specified URL.
 
