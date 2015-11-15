@@ -1,8 +1,9 @@
 body {
-  padding: 1px;
+  padding: 12px;
   height: 100%;
   width: 300px;
   background-color: #f1f1f1;
+  margin: 0px;
 }
 
 h1, h2, h3, h4, h5, p {
@@ -45,17 +46,21 @@ button {
   background-color: #ee645c;
   color: white;
   border: none;
-  width: 90%;
+  width: 100%;
   height: 3em;
   margin: 0 auto;
   border-radius: 4px;
   font-size: 1.25em;
   font-weight: 700;
 }
+.add-to-bundle i {
+  margin-right: 5px;
+}
 
 .page-header {
   font-weight: 700;
   font-size: 1.2em;
+  margin-bottom: 12px;
 }
 
 .casual {
@@ -72,18 +77,31 @@ button {
 
 .existing-bundles {
   background-color: white;
-  padding: .5em;
-  margin: .5em;
+  padding: 15px 0px 0px;
+  margin: .5em 0px;
+  border-radius: 4px;
 }
 
 .existing-bundle-header {
   text-align: center;
+  border-bottom: 1px solid #d5d5d5;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+}
+
+.bundle-details {
+  padding: 0px 10px 12px 10px;
+  border-bottom: 1px solid #d5d5d5;
 }
 
 .bundle-title {
   font-size: 1.5em;
-  margin: .5em 0;
-  padding: .5em;
+  margin: 0px;
+  padding: 0px;
+}
+
+.bundle-details p {
+  margin-left: 0px;
 }
 
 .comfort-level{
@@ -92,15 +110,40 @@ button {
 
 .bundle-link-list {
   border-radius: 4px;
+  margin: 0px;
+  padding: 0px 10px;
 }
 
 .bundle-link {
   border-bottom: 1px solid #d5d5d5;
-  margin: .5em;
+  padding: 15px 0px 12px 0px;
+  margin: 0px;
+}
+.bundle-link-list:last-child {
+  border-bottom: none;
+}
+
+.bundle-link p {
+  margin: 0px;
+  padding: 0px;
+  font-size: 13px;
+}
+
+.bundle-link p.link-tite-row {
+  margin-bottom: 8px;
+  font-size: 15px;
+}
+
+.bundle-link p.link-tite-row span {
+  float: right;
 }
 
 .comfort-level-colors {
-  border-bottom: 1px solid #d5d5d5;
+  
+}
+
+.comfort-level-colors span {
+  margin-right: 8px;
 }
 
 .link-details {
@@ -112,7 +155,11 @@ button {
 }
 
 .see-more-bundles {
+  padding: 15px 0px;
+}
 
+.see-more-bundles p{
+  margin: 0px;
 }
 
 .see-more-links {
@@ -123,7 +170,7 @@ button {
 
 .view-more-bundles-about {
   text-align: center;
-  font-size: 1em;
+  font-size: 1.2em;
   margin: 2em;
 }
 
