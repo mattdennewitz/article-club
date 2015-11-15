@@ -7,20 +7,36 @@ function renderPage(data) {
     var $b = $('#bundles');
     $b.empty();
 
+    var $bundleTitle = $('.bundle-title');
+    var $bundleTopic = $('.bundle-topic-name');
+    var $bundleCurator = $('.bundle-curator');
+
+    var $myBundles = $('.my-bundles');
+
+    var $link = $('.bundle-link');
+
     for (var i in data) {
         var bundle = data[i];
         var el = $('<li>' + bundle.title + '</li>');
 
-        var linksContainer = $('<ul></ul>');
+        $bundleCurator.html(bundle.curator);
+        $bundleTitle.html(bundle.title);
+        $bundleTopic.html(bundle.title);
+        $myBundles.append('<li class="bundle"><p class="my-bundle-item">' + bundle.title + '<i class="add-button fa fa-plus-circle"></i></p></li>');
 
         for (var l in bundle.link_list) {
             var link = bundle.link_list[l];
 
-            linksContainer.append($('<li><a href="' + link.link.url + '">' + link.link.title + '</a></li>'));
+            $link.append('<li class="bundle-link"><a class="linkurl urlname" href="' + link.link.url + '">' + link.link.title + '</a><span class="comfort-level"><i class="fa fa-circle comfort-' + link.comfort_level + '"></i></span></li>');
+            console.log(link);
+
+            // linksContainer.append(
+            //     $('<li><a href="' + link.link.url + '">' + link.link.title + '</a></li>')
+            // );
         }
 
         // append list of links to parent bundle <ul>
-        el.append(linksContainer);
+        // el.append(linksContainer);
 
         // add bundle card to popup list
         $b.append(el);
