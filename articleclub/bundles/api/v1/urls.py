@@ -4,7 +4,7 @@ from . import views
 
 
 urlpatterns = [
-    url(r'^(?P<bundle_id>)/add/$', views.add_link_to_bundle,
+    url(r'^(?P<bundle_id>\d+)/add/$', views.add_link_to_bundle,
         name='add-link-to-bundle'),
     url(r'^new/$', views.CreateBundleView.as_view(),
         name='create-bundle'),
