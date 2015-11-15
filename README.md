@@ -50,6 +50,7 @@ $ ./manage.py runserver
 
 A couple of features we've considered adding ...
 
+- Extension view when a link doesn't belong to a bundle yet.
 - Bundles destination page
 - Connect "This link belongs to ## bundles" to the destination page, linking to those bundles.
 - Create a new bundle from the extension
