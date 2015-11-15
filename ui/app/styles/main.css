@@ -126,7 +126,6 @@ button {
 .bundle-link p {
   margin: 0px;
   padding: 0px;
-  font-size: 13px;
 }
 
 .bundle-link p.link-tite-row {
@@ -180,8 +179,9 @@ button {
 
 
 .choose-header {
-  margin: .5em .5em 0 .5em;
-  padding: 1em;
+  font-size: 1.3em;
+  margin: 0px;
+  padding: 1em 0px;
   border-bottom: 1px solid #d5d5d5;
 }
 
@@ -190,9 +190,13 @@ button {
   text-align: center;
 }
 
+.my-bundles li.bundle {
+   border-bottom: 1px solid #d5d5d5;
+   cursor: pointer;
+}
+
 .my-bundle-item {
   font-size: 1.2em;
-  border-bottom: 1px solid #d5d5d5;
   padding: .75em;
 }
 
@@ -205,15 +209,21 @@ button {
 .create {
   background-color: white;
   border-radius: 4px;
-  border: none;
+  border: 1px solid #d5d5d5;
   padding: .75em;
+  margin-top: 8px;
 }
 
 .create-new {
-  font-size: 1.2 em;
+  font-size: 1.2em;
 }
 
 .browse-by-topic {
   text-align: center;
   margin: 2em;
+  font-size: 1.2em;
+}
+
+ul.my-bundles {
+  margin: 0px;
 }
