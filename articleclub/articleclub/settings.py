@@ -15,6 +15,19 @@ import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+# public suffix list path
+os.environ['PUBLIC_SUFFIX_LIST'] = os.path.realpath(
+    os.path.join(
+        BASE_DIR,
+        os.pardir,
+        'data',
+        'public-suffix-list.dat'
+    )
+)
+
+CORS_ORIGIN_ALLOW_ALL = True
+
+# ---
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
@@ -40,6 +53,7 @@ INSTALLED_APPS = (
 
     'taggit',
     'rest_framework',
+    'corsheaders',
 
     'articleclub',
     'bundles',
@@ -47,6 +61,7 @@ INSTALLED_APPS = (
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
