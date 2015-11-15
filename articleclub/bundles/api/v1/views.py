@@ -108,7 +108,7 @@ def find_bundles_for_url(request):
     try:
         link = Link.objects.get(url=url)
     except Link.DoesNotExist:
-        return Response('[]')
+        return Response([])
 
     # find all bundle memberships for this link
     memberships = (BundleLink.objects
