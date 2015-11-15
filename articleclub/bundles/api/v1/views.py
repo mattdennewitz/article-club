@@ -59,7 +59,7 @@ def add_link_to_bundle(request, bundle_id):
     # assert that "comfort_level" is specified.
     # this is validated outside of the `Link` fields handled by
     # DRF serializer validation.
-    comfort_level = request.data.get('comfort_level', None)
+    comfort_level = int(request.data.get('comfort_level', None))
     if comfort_level not in [i[0] for i in COMFORT_LEVELS]:
         return Response({'error': True,
                         'msg': 'Please specify a reader comfort level'
