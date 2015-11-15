@@ -1,40 +1,32 @@
 {
   "name": "__MSG_appName__",
-  "version": "0.0.17",
+  "version": "0.0.122",
   "manifest_version": 2,
   "description": "__MSG_appDescription__",
   "icons": {
     "16": "images/icon-16.png",
     "128": "images/icon-128.png"
   },
-  "content_scripts": [
-    {
-      "matches": [
-        "http://*/*",
-        "https://*/*"
-      ],
-      "css": [
-        "styles/main.css"
-      ],
-      "js": [
-        "scripts.babel/jquery.min.js"
-      ]
-    }
-  ],
   "default_locale": "en",
   "background": {
     "scripts": [
-      "scripts.babel/chromereload.js",
-      "scripts.babel/background.js"
+      "scripts/chromereload.js",
+      "scripts/background.js",
+      "scripts/jquery.min.js"
     ]
   },
-  "permissions": [],
+  "permissions": [
+    "tabs",
+    "webRequest",
+    "https://*/*",
+    "http://*/*"
+  ],
   "browser_action": {
     "default_icon": {
       "19": "images/icon-19.png",
       "38": "images/icon-38.png"
     },
-    "default_title": "article-club",
+    "default_title": "demo",
     "default_popup": "popup.html"
   }
 }
