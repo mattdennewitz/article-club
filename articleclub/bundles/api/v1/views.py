@@ -11,6 +11,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
 import urltools
+import bundles.alchemy_utils
 
 from ...models import COMFORT_LEVELS, Bundle, Link, BundleLink
 from .serializers import (BundleSerializer, LinkSerializer,
@@ -61,7 +62,8 @@ def add_link_to_bundle(request, bundle_id):
     comfort_level = request.data.get('comfort_level', None)
     if comfort_level not in [i[0] for i in COMFORT_LEVELS]:
         return Response({'error': True,
-                        'msg': 'Please specify a reader comfort level'})
+                        'msg': 'Please specify a reader comfort level'
+                        })
 
     url = urltools.normalize(url)
 
@@ -70,16 +72,22 @@ def add_link_to_bundle(request, bundle_id):
         link = Link.objects.get(url=url)
     except Link.DoesNotExist:
         # create a new link
-        link_serializer = LinkSerializer(request.data)
+        link_serializer = LinkSerializer(data=request.query_params)
         link_serializer.is_valid(raise_exception=True)
         link = link_serializer.save()
 
     # add link to bundle
-    if not BundleLink.objects.exists(bundle=bundle, link=link):
-        BundleLink.objects.create(bundle=bundle, link=link)
+    if not BundleLink.objects.filter(bundle=bundle, link=link).exists():
+        # call alchemy util to fetch concepts for URL
+        concepts = bundles.alchemy_utils.get_concepts(url)
+        this_bundle = BundleLink.objects.create(bundle=bundle,
+                                  link=link,
+                                  comfort_level=comfort_level,
+                                  curator_id=1)
+        for concept in concepts:
+            this_bundle.tags.add(concept)
 
     return Response('', status=201)
-
 
 @api_view(http_method_names=['GET'])
 def find_bundles_for_url(request):
