@@ -72,9 +72,10 @@ def add_link_to_bundle(request, bundle_id):
         link = Link.objects.get(url=url)
     except Link.DoesNotExist:
         # create a new link
+        read_time = bundles.alchemy_utils.get_read_time(url)
         link_serializer = LinkSerializer(data=request.data)
         link_serializer.is_valid(raise_exception=True)
-        link = link_serializer.save()
+        link = link_serializer.save(read_time=read_time)
 
     # add link to bundle
     if not BundleLink.objects.filter(bundle=bundle, link=link).exists():
