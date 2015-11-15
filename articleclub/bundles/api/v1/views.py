@@ -72,7 +72,7 @@ def add_link_to_bundle(request, bundle_id):
         link = Link.objects.get(url=url)
     except Link.DoesNotExist:
         # create a new link
-        link_serializer = LinkSerializer(data=request.query_params)
+        link_serializer = LinkSerializer(data=request.data)
         link_serializer.is_valid(raise_exception=True)
         link = link_serializer.save()
 
